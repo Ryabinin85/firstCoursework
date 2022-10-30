@@ -67,8 +67,5 @@ public class Main {
         Console.findByID(employeeBook.getAllEmployees(), 1);
 
         Console.printFullInfo(employeeBook.add(employeeBook.getAllEmployees(), "Vasya", 55555, "Testing"));
-
-//        ConsolePrinter.printFullInfo(employeeBook.getAllEmployees());
-
     }
 }

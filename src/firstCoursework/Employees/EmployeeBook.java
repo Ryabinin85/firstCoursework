@@ -54,10 +54,9 @@ public class EmployeeBook extends Employee{
             }
             else {
                 stuff[i] = new Employee(name, salary, department);
-                newStuff[stuff.length].setID(i);
+                newStuff[stuff.length].setID(i+1);
             }
         }
         return newStuff;
     }
-
 }
