@@ -64,7 +64,7 @@ public class Main {
         Console.findByName(employeeBook.getAllEmployees(), "Sergei Ivanovich");
 
         // Поиск сотрудника по ID
-        Console.findByID(employeeBook.getAllEmployees(), 1);
+        Console.findByID(employeeBook.getAllTesters(), 5);
 
         Console.printFullInfo(employeeBook.add(employeeBook.getAllEmployees(), "Vasya", 55555, "Testing"));
     }

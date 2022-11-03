@@ -37,9 +37,10 @@ public class Employee {
         nextId++;
     }
     //увеличивает ЗП на определенный процент
-    public void raiseSalary(Employee[] stuff, final double raiseSalaryByPercent) {
+    public void raiseSalary(Employee[] staff, final double raiseSalaryByPercent) {
         System.out.println("Employees salary raise by " + raiseSalaryByPercent + "%\n");
-        for (Employee e : stuff){
+        for (Employee e : staff) {
+            if (e == null) continue;
             if (raiseSalaryByPercent != 0) {
                 double raise = e.getSalary() * raiseSalaryByPercent / 100;
                 e.salary = e.getSalary() + raise;
@@ -47,9 +48,10 @@ public class Employee {
         }
     }
     // Изменение зарплаты и отдела сотрудника, найденного по имени
-    public void changeEmployeeByName(Employee[] stuff, String name, double newSalary, String newDepartment) {
+    public void changeEmployeeByName(Employee[] staff, String name, double newSalary, String newDepartment) {
         boolean foundByName = false;
-        for (Employee e : stuff){
+        for (Employee e : staff){
+            if (e == null) continue;
             if (Objects.equals(e.name, name)) {
                 foundByName = true;
                 e.setSalary(newSalary);
