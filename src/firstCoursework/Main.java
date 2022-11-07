@@ -34,7 +34,9 @@ public class Main {
 
         // 2.2, 2,3 вывод минимальной и максимальной зарплаты среди testers
         Console.printMaxSalary(employeeBook.getAllTesters());
+        Console.printMaxSalary(employeeBook.getAllEmployees(), "Testing");
         Console.printMinSalary(employeeBook.getAllTesters());
+        Console.printMinSalary(employeeBook.getAllEmployees(), "Testing");
 
         // 2.4. вывод суммы затрат на зарплаты в месяц среди testers
         Console.printMonthSalarySum(employeeBook.getAllTesters());
@@ -52,7 +54,7 @@ public class Main {
         System.out.println("\n--------- **Повышенная сложность 2** ---------\n");
 
         // Поиск всех сотрудников по названию отдела
-        Console.printFullInfo(employeeBook.findByDepartment(employeeBook.getAllEmployees(), "Testing"));
+        Console.findByDepartment(employeeBook.getAllEmployees(), "Testing");
 
         // Поиск сотрудника по имени
         Console.findByName(employeeBook.getAllEmployees(), "Petya");
@@ -67,5 +69,13 @@ public class Main {
         Console.findByID(employeeBook.getAllTesters(), 5);
 
         Console.printFullInfo(employeeBook.add(employeeBook.getAllEmployees(), "Vasya", 55555, "Testing"));
+        employeeBook.del(employeeBook.getAllEmployees(), 1);
+        employeeBook.del(employeeBook.getAllEmployees(), 2);
+        Console.printFullInfo(employeeBook.getAllEmployees());
+        employeeBook.add(employeeBook.getAllEmployees(), "Vasya", 66666, "Testing");
+        employeeBook.add(employeeBook.getAllEmployees(), "Vasya", 77777, "Testing");
+        employeeBook.add(employeeBook.getAllEmployees(), "Vasya", 88888, "Testing");
+        Console.printFullInfo(employeeBook.getAllEmployees());
+
     }
 }

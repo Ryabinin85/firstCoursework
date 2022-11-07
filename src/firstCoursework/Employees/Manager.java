@@ -13,5 +13,4 @@ public class Manager extends Employee {
     public void setBonus(double setBonus){
         bonus = setBonus;
     }
-
 }

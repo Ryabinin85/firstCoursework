@@ -1,5 +1,6 @@
 package firstCoursework.Employees;
-import java.util.Objects;
+
+import java.util.Arrays;
 
 public class EmployeeBook extends Employee {
     private final Manager director = new Manager("Sergei Ivanovich", 350000, "Director");
@@ -13,7 +14,9 @@ public class EmployeeBook extends Employee {
     private final Engineer engineer3 = new Engineer("Sergei Vitalievich", 110000, "Engineering");
     private final Developer developer1 = new Developer("Igor Valentinovich", 130000, "Development");
     private final Developer developer2 = new Developer("Victor Nikolaevich", 150000, "Development");
-    private final Employee[] staff = new Employee[] {null, director, tester1, null, tester2, tester3, tester4, tester5,
+
+
+    private final Employee[] staff = new Employee[] {null, director, tester1, null, null, tester2, tester3, tester4, tester5,
             engineer1, engineer2, engineer3, developer1, developer2, null, null, null, null};
     private final Tester[] testers = new Tester[] {tester1, tester2, tester3, tester4, tester5};
 
@@ -25,41 +28,56 @@ public class EmployeeBook extends Employee {
         return testers;
     }
 
-    public Employee[] findByDepartment(Employee[] staff, String department) {
-        System.out.println("Find employees by department: \n" + department);
-        int j = 0;
-        int k = 0;
-
-        for (Employee employee : staff) {
-            if (employee == null) continue;
-            if (Objects.equals(employee.getDepartment(), department)) {
-                j++;
+    // сортировка массива (все null вправо)
+    public void nullSorter(Employee[] staff) {
+        int count = 0;
+        for (int i = 0; i < staff.length; i++) {
+            if (staff[i] != null) {
+                staff[count] = staff[i];
+                count++;
             }
         }
-        Employee[] foundStaff = new Employee[j];
-        for (Employee employee : staff) {
-            if (employee == null) continue;
-            if (Objects.equals(employee.getDepartment(), department)) {
-                foundStaff[k] = employee;
-                k++;
-            }
+        while (count < staff.length - 1) {
+            staff[count] = null;
+            count++;
         }
-        return foundStaff;
     }
+    // добавить работника
     public Employee[] add(Employee[] staff, String name, double salary, String department) {
-        for(int i = 0; i < staff.length-1; i++) {
-            if (staff[i] == null) {
-                staff[i] = staff[i+1];
-                staff[i+1] = null;
-            }
-
-        }
+        nullSorter(staff);
+        boolean staffed = true;
         for(int i = 0; i < staff.length; i++) {
             if (staff[i] == null) {
+                staffed = false;
                 staff[i] = new Employee(name, salary, department);
                 break;
             }
         }
+        if (staffed) System.out.println("The company is staffed by employees\n");
         return staff;
+    }
+    // удалить работника
+    public void del(Employee[] staff, int id) {
+        for (int i = 0; i < staff.length; i++) {
+            if (staff[i] != null && staff[i].getId() == id)
+                staff[i] = null;
+        }
+        nullSorter(staff);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        EmployeeBook that = (EmployeeBook) o;
+        return Arrays.equals(staff, that.staff);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + Arrays.hashCode(staff);
+        return result;
     }
 }
