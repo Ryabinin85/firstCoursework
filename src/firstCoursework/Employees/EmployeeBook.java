@@ -1,5 +1,6 @@
 package firstCoursework.Employees;
-import java.util.Objects;
+
+import java.util.Arrays;
 
 public class EmployeeBook extends Employee {
     private final Manager director = new Manager("Sergei Ivanovich", 350000, "Director");
@@ -44,22 +45,39 @@ public class EmployeeBook extends Employee {
     // добавить работника
     public Employee[] add(Employee[] staff, String name, double salary, String department) {
         nullSorter(staff);
+        boolean staffed = true;
         for(int i = 0; i < staff.length; i++) {
             if (staff[i] == null) {
+                staffed = false;
                 staff[i] = new Employee(name, salary, department);
                 break;
             }
         }
+        if (staffed) System.out.println("The company is staffed by employees\n");
         return staff;
     }
     // удалить работника
     public void del(Employee[] staff, int id) {
         for (int i = 0; i < staff.length; i++) {
-            if (staff[i] == null) continue;
-            if (staff[i].getId() == id) {
+            if (staff[i] != null && staff[i].getId() == id)
                 staff[i] = null;
-            }
         }
         nullSorter(staff);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        EmployeeBook that = (EmployeeBook) o;
+        return Arrays.equals(staff, that.staff);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + Arrays.hashCode(staff);
+        return result;
     }
 }

@@ -7,23 +7,21 @@ public class Console {
     //Вывод всей информации о всех сотрудниках
     public static void printFullInfo(Employee[] staff) {
         for (Employee employee : staff) {
-            if (employee == null) continue;
-            System.out.print(employee);
+            if (employee != null) System.out.print(employee);
         }
         System.out.println();
     }
     public static void printWithoutDepartment(Employee[] staff) {
         for (Employee employee : staff) {
-            if (employee == null) continue;
-            employee.toStringWithoutDepartment();
+            if (employee != null) employee.toStringWithoutDepartment();
         }
     }
     //Вывод имен сотрудников
     public static void printNames(Employee[] staff) {
         System.out.println("Employees names: ");
         for (Employee employee : staff) {
-            if (employee == null) continue;
-            System.out.printf("ID: %-6s Employee: %-25s\n", employee.getId(), employee.getName());
+            if (employee != null)
+                System.out.printf("ID: %-6s Employee: %-25s\n", employee.getId(), employee.getName());
         }
         System.out.println();
     }
@@ -33,8 +31,7 @@ public class Console {
         String department = null;
         String name = null;
         for (Employee employee : staff) {
-            if (employee == null) continue;
-            if (minSalary > employee.getSalary()) {
+            if (employee != null && minSalary > employee.getSalary()) {
                 minSalary = employee.getSalary();
                 department = employee.getDepartment();
                 name = employee.getName();
@@ -46,8 +43,8 @@ public class Console {
         double minSalary = Double.POSITIVE_INFINITY;
         String name = null;
         for (Employee employee : staff) {
-            if (employee == null) continue;
-            if (Objects.equals(employee.getDepartment(), department) && minSalary > employee.getSalary()) {
+            if (employee != null && Objects.equals(employee.getDepartment(), department)
+                    && minSalary > employee.getSalary()) {
                 minSalary = employee.getSalary();
                 department = employee.getDepartment();
                 name = employee.getName();
@@ -61,8 +58,7 @@ public class Console {
         String department = null;
         String name = null;
         for (Employee employee : staff) {
-            if (employee == null) continue;
-            if (maxSalary < employee.getSalary()) {
+            if (employee != null && maxSalary < employee.getSalary()) {
                 maxSalary = employee.getSalary();
                 department = employee.getDepartment();
                 name = employee.getName();
@@ -74,8 +70,8 @@ public class Console {
         double maxSalary = 0;
         String name = null;
         for (Employee employee : staff) {
-            if (employee == null) continue;
-            if (Objects.equals(employee.getDepartment(), department) && maxSalary < employee.getSalary()) {
+            if (employee != null && Objects.equals(employee.getDepartment(), department)
+                    && maxSalary < employee.getSalary()) {
                 maxSalary = employee.getSalary();
                 department = employee.getDepartment();
                 name = employee.getName();
@@ -87,8 +83,7 @@ public class Console {
     public static void printMonthSalarySum(Employee[] staff) {
         double employeesSalarySum = 0;
         for (Employee employee : staff) {
-            if (employee == null) continue;
-            employeesSalarySum = employeesSalarySum + employee.getSalary();
+            if (employee != null) employeesSalarySum = employeesSalarySum + employee.getSalary();
         }
         System.out.printf("%-10s Sum of all Employee's salary.\n\n", employeesSalarySum);
     }
@@ -97,8 +92,7 @@ public class Console {
         double employeesAverageSalary = 0;
         double employeesSalarySum = 0;
         for (Employee employee : staff) {
-            if (employee == null) continue;
-            employeesSalarySum = employeesSalarySum + employee.getSalary();
+            if (employee != null) employeesSalarySum = employeesSalarySum + employee.getSalary();
             employeesAverageSalary = employeesSalarySum / (staff.length);
         }
         System.out.printf("%-10s Average Employee's salary.\n\n", Math.ceil(employeesAverageSalary));
@@ -107,20 +101,16 @@ public class Console {
     public static void printLessThenSalary(Employee[] staff, final double salaryLessThen) {
         System.out.printf("\nEmployees with salary less then %.1f:\n", salaryLessThen);
         for (Employee employee : staff) {
-            if (employee == null) continue;
-            if (employee.getSalary() <= salaryLessThen) {
+            if (employee != null && employee.getSalary() <= salaryLessThen)
                 employee.toStringWithoutDepartment();
-            }
         }
     }
     //вывод сотрудников с зарплатой, больше заданной
     public static void printMoreThenSalary(Employee[] staff, final double salaryMoreThen) {
         System.out.printf("\nEmployees with salary more then %.1f:\n", salaryMoreThen);
         for (Employee employee : staff) {
-            if (employee == null) continue;
-            if (employee.getSalary() >= salaryMoreThen) {
+            if (employee != null && employee.getSalary() >= salaryMoreThen)
                 employee.toStringWithoutDepartment();
-            }
         }
         System.out.println();
     }
@@ -128,8 +118,7 @@ public class Console {
     public static void findByName(Employee[] staff, String name) {
         boolean foundByName = false;
         for (Employee employee : staff) {
-            if (employee == null) continue;
-            if (Objects.equals(employee.getName(), name)) {
+            if (employee != null && Objects.equals(employee.getName(), name)) {
                 foundByName = true;
                 System.out.printf("Employee %s found:\n", name);
                 System.out.print(employee);
@@ -141,8 +130,7 @@ public class Console {
     public static void findByID (Employee[] staff, int ID) {
         boolean foundByID = false;
         for (Employee employee : staff) {
-            if (employee == null) continue;
-            if (employee.getId() == ID) {
+            if (employee != null && employee.getId() == ID) {
                 foundByID = true;
                 System.out.printf("Employee with ID № %d found:\n", ID);
                 System.out.print(employee);
@@ -155,10 +143,8 @@ public class Console {
     public static void findByDepartment(Employee[] staff, String department) {
         System.out.println("Find employees by department: \n" + department);
         for (Employee employee : staff) {
-            if (employee == null) continue;
-            if (Objects.equals(employee.getDepartment(), department)) {
+            if (employee != null && Objects.equals(employee.getDepartment(), department))
                 System.out.print(employee);
-            }
         }
         System.out.println();
     }
